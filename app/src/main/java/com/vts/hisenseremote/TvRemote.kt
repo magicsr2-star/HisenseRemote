@@ -3,7 +3,7 @@ package com.vts.hisenseremote
 import android.os.Handler
 import android.os.Looper
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
-import org.eclipse.paho.client.mqttv3.MqttCallback
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended
 import org.eclipse.paho.client.mqttv3.MqttClient
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions
 import org.eclipse.paho.client.mqttv3.MqttMessage
@@ -59,15 +59,30 @@ class TvRemote(
                     userName = "hisenseservice"
                     password = "multimqttservice".toCharArray()
                     isCleanSession = true
-                    keepAliveInterval = 90
+                    // Reconexion automatica: sin esto, al perder la
+                    // conexion (TV/router/WiFi) habia que pulsar el
+                    // boton para volver a conectar.
+                    isAutomaticReconnect = true
+                    // Ping cada 30 s (antes 90): mantiene viva la
+                    // conexion en reposo y detecta el corte antes.
+                    keepAliveInterval = 30
                     connectionTimeout = 10
                     // Will topic como en la captura PCAP
                     setWill("/mobile/${UUID.randomUUID()}", ByteArray(0), 0, false)
                 }
-                c.setCallback(object : MqttCallback {
+                c.setCallback(object : MqttCallbackExtended {
                     override fun connectionLost(cause: Throwable?) {
                         notifyConnection(false)
                         post("Conexion perdida", false)
+                    }
+                    // Paho llama aqui tambien al reconectar solo:
+                    // sin esto el boton se quedaba en rojo aunque
+                    // la conexion ya estuviera de vuelta.
+                    override fun connectComplete(reconnect: Boolean, serverURI: String?) {
+                        if (reconnect) {
+                            post("Conectada", true)
+                            notifyConnection(true)
+                        }
                     }
                     override fun messageArrived(topic: String?, message: MqttMessage?) {}
                     override fun deliveryComplete(token: IMqttDeliveryToken?) {}
@@ -88,8 +103,11 @@ class TvRemote(
     private fun publish(topic: String, payload: String): Boolean {
         val c = client
         if (c == null || !c.isConnected) {
-            post("No conectado. Toca el boton de encendido para conectar.", false)
+            // Si se pulsa un boton estando desconectado, intentar
+            // reconectar en vez de no hacer nada.
+            post("Reconectando…", false)
             notifyConnection(false)
+            connect()
             return false
         }
         return try {
