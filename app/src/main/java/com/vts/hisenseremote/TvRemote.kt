@@ -114,14 +114,19 @@ class TvRemote(
 
     /**
      * Abre una app en la TV (ej. "netflix", "youtube").
-     * Es el mecanismo documentado de VIDAA (actions/launchapp).
-     * NO verificado aun en la HU50N6000UW: si la TV lo ignora, el
-     * siguiente paso es capturar lo que envia la app oficial.
+     * launchapp vive en ui_service (NO en remote_service) y el
+     * payload es JSON, no texto plano: por eso los botones no
+     * hacian nada en v2.2. Netflix appId "1" esta documentado
+     * en varios modelos VIDAA; YouTube se manda con appId vacio
+     * y url "youtube" (la TV lo resuelve por nombre/url).
      */
     fun launchApp(app: String) {
         io.execute {
-            if (publish("/remoteapp/tv/remote_service/$clientId/actions/launchapp", app)) {
-                post("Abriendo $app…", true)
+            val name = if (app == "netflix") "Netflix" else "YouTube"
+            val appId = if (app == "netflix") "1" else ""
+            val payload = "{\"appIcon\":\"\",\"appId\":\"$appId\",\"has_detail_page\":0,\"isLocalApp\":1,\"name\":\"$name\",\"storeType\":0,\"type\":0,\"url\":\"$app\",\"urlType\":37}"
+            if (publish("/remoteapp/tv/ui_service/$clientId/actions/launchapp", payload)) {
+                post("Abriendo $name…", true)
             }
         }
     }
