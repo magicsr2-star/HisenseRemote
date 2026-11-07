@@ -22,30 +22,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         // La IP solo se cambia con pulsacion larga sobre el titulo.
         remote.tvIp = prefs.getString(PREF_TV_IP, remote.tvIp) ?: remote.tvIp
 
-        remote.onStatus = { msg, ok ->
-            binding.tvStatus.text = msg
-            binding.tvStatus.setTextColor(
-                if (ok) getColor(android.R.color.holo_green_light)
-                else getColor(android.R.color.holo_red_light)
-            )
-        }
-
-        // Boton de encendido = boton de conectar.
-        // Rojo si no esta conectada, verde si lo esta.
+        // Sin textos de estado: solo el color del boton dice si esta conectada.
         remote.onConnectionChanged = { connected ->
             binding.btnPower.setBackgroundResource(
                 if (connected) R.drawable.power_circle_green
                 else R.drawable.power_circle_red
-            )
-            binding.tvPowerHint.text =
-                if (connected) "Conectada" else "Toca para conectar"
-            binding.tvPowerHint.setTextColor(
-                if (connected) getColor(android.R.color.holo_green_light)
-                else getColor(android.R.color.holo_red_light)
             )
         }
 

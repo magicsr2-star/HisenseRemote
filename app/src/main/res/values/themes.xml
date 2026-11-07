@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.HisenseRemote" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.HisenseRemote" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#2F6FED</item>
         <item name="colorPrimaryVariant">#1E4FB0</item>
         <item name="colorOnPrimary">#FFFFFF</item>
