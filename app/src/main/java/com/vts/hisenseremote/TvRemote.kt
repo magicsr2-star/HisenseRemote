@@ -2,6 +2,8 @@ package com.vts.hisenseremote
 
 import android.os.Handler
 import android.os.Looper
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
+import org.eclipse.paho.client.mqttv3.MqttCallback
 import org.eclipse.paho.client.mqttv3.MqttClient
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions
 import org.eclipse.paho.client.mqttv3.MqttMessage
@@ -14,10 +16,14 @@ import java.util.concurrent.Executors
 
 /**
  * MQTT legacy Hisense VIDAA, directo a la TV, sin puente.
- * Tu TV: HU50N6000UW, 172.30.218.102:36669
- * Usuario hisenseservice / password multimqttservice, sin PIN.
- * Topic: /remoteapp/tv/remote_service/{clientId}/actions/sendkey
+ * TV: HU50N6000UW, MQTT 36669 legacy, sin PIN.
+ * Usuario hisenseservice / password multimqttservice.
+ * Topic sendkey: /remoteapp/tv/remote_service/{clientId}/actions/sendkey
  * Payload: texto plano, ej. KEY_POWER
+ *
+ * La IP por defecto es 172.30.218.102; se cambia solo desde el
+ * dialogo de pulsacion larga sobre el titulo (MainActivity).
+ * Los mensajes de estado NO incluyen la IP ni el topic.
  */
 class TvRemote(
     var tvIp: String = "172.30.218.102",
@@ -25,6 +31,9 @@ class TvRemote(
     var clientId: String = "user4321\$normal_v4"
 ) {
     var onStatus: ((String, Boolean) -> Unit)? = null
+
+    /** true al conectar con exito, false al desconectar o fallar. */
+    var onConnectionChanged: ((Boolean) -> Unit)? = null
 
     private val main = Handler(Looper.getMainLooper())
     private val io = Executors.newSingleThreadExecutor()
@@ -34,6 +43,10 @@ class TvRemote(
 
     private fun post(msg: String, ok: Boolean = true) {
         main.post { onStatus?.invoke(msg, ok) }
+    }
+
+    private fun notifyConnection(connected: Boolean) {
+        main.post { onConnectionChanged?.invoke(connected) }
     }
 
     fun connect() {
@@ -48,35 +61,82 @@ class TvRemote(
                     isCleanSession = true
                     keepAliveInterval = 90
                     connectionTimeout = 10
-                    // Will topic como en tu captura PCAP
+                    // Will topic como en la captura PCAP
                     setWill("/mobile/${UUID.randomUUID()}", ByteArray(0), 0, false)
                 }
-                post("Conectando a $uri…")
+                c.setCallback(object : MqttCallback {
+                    override fun connectionLost(cause: Throwable?) {
+                        notifyConnection(false)
+                        post("Conexion perdida", false)
+                    }
+                    override fun messageArrived(topic: String?, message: MqttMessage?) {}
+                    override fun deliveryComplete(token: IMqttDeliveryToken?) {}
+                })
+                post("Conectando…")
                 c.connect(opts)
                 client = c
-                post("Conectado a $tvIp:36669", true)
+                post("Conectada", true)
+                notifyConnection(true)
             } catch (e: Exception) {
+                notifyConnection(false)
                 post("Error: ${e.message}", false)
             }
         }
     }
 
+    /** Publica un payload de texto en un topic de acciones. Devuelve true si se envio. */
+    private fun publish(topic: String, payload: String): Boolean {
+        val c = client
+        if (c == null || !c.isConnected) {
+            post("No conectado. Toca el boton de encendido para conectar.", false)
+            notifyConnection(false)
+            return false
+        }
+        return try {
+            c.publish(topic, MqttMessage(payload.toByteArray(Charsets.UTF_8)).apply {
+                qos = 0
+                isRetained = false
+            })
+            true
+        } catch (e: Exception) {
+            post("Error: ${e.message}", false)
+            false
+        }
+    }
+
     fun sendKey(key: String) {
         io.execute {
-            try {
-                val c = client
-                if (c == null || !c.isConnected) {
-                    post("No conectado. Toca Conectar primero.", false)
-                    return@execute
-                }
-                val topic = "/remoteapp/tv/remote_service/$clientId/actions/sendkey"
-                c.publish(topic, MqttMessage(key.toByteArray(Charsets.UTF_8)).apply {
-                    qos = 0
-                    isRetained = false
-                })
-                post("$key → $topic", true)
-            } catch (e: Exception) {
-                post("Error $key: ${e.message}", false)
+            if (publish("/remoteapp/tv/remote_service/$clientId/actions/sendkey", key)) {
+                post("$key enviado", true)
+            }
+        }
+    }
+
+    /**
+     * Abre una app en la TV (ej. "netflix", "youtube").
+     * Es el mecanismo documentado de VIDAA (actions/launchapp).
+     * NO verificado aun en la HU50N6000UW: si la TV lo ignora, el
+     * siguiente paso es capturar lo que envia la app oficial.
+     */
+    fun launchApp(app: String) {
+        io.execute {
+            if (publish("/remoteapp/tv/remote_service/$clientId/actions/launchapp", app)) {
+                post("Abriendo $app…", true)
+            }
+        }
+    }
+
+    /**
+     * Envia texto tecleado a la TV (actions/input).
+     * Tampoco esta verificado en este modelo: si escribir no
+     * funciona, usar el teclado numerico + D-pad en el teclado
+     * en pantalla de la TV.
+     */
+    fun sendText(text: String) {
+        if (text.isBlank()) return
+        io.execute {
+            if (publish("/remoteapp/tv/remote_service/$clientId/actions/input", text)) {
+                post("Texto enviado", true)
             }
         }
     }
@@ -95,15 +155,19 @@ class TvRemote(
                     s.broadcast = true
                     s.send(DatagramPacket(packet, packet.size, InetAddress.getByName("255.255.255.255"), 9))
                 }
-                post("Wake-on-LAN a $tvMac", true)
+                post("Senal de encendido enviada", true)
             } catch (e: Exception) {
-                post("Error WOL: ${e.message}", false)
+                post("Error: ${e.message}", false)
             }
         }
     }
 
     fun disconnect() {
-        io.execute { disconnectQuietly(); post("Desconectado") }
+        io.execute {
+            disconnectQuietly()
+            notifyConnection(false)
+            post("Desconectado")
+        }
     }
 
     private fun disconnectQuietly() {

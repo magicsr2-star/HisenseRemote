@@ -38,12 +38,39 @@ O por terminal, en la carpeta del proyecto:
 ./gradlew assembleDebug
 ```
 
+## Novedades v2.0
+- Diseno nuevo como en la imagen de referencia: fondo oscuro, titulo
+  "Hisense Remote" y subtitulo "HU50N6000UW · MQTT · legacy".
+- Boton de encendido grande y redondo = boton de conectar: rojo
+  cuando no esta conectada, VERDE cuando la conexion MQTT se confirma.
+  Al abrir la app conecta sola. Si ya esta conectada, tocarlo envia
+  KEY_POWER (apaga/enciende la TV).
+- Ya NO se ve la IP en pantalla. Para cambiarla: pulsacion larga
+  sobre el titulo "Hisense Remote", se guarda en el telefono.
+- Atajos Netflix y YouTube (botones circulares negros).
+- Boton TECLADO: abre un dialogo con teclado numerico 0-9 (sendkey,
+  probado) y un campo de texto con el teclado QWERTY del telefono
+  para escribir en la TV.
+- D-pad azul con OK dorado, ATRAS/HOME/SALIR grises, MUTE/MENU
+  turquesa, filas "— VOL +" y "— CANAL +", PLAY verde y PAUSA morada.
+
+### A probar en la TV (no verificado aun en la HU50N6000UW)
+1. **Netflix / YouTube**: los botones publican en
+   `/remoteapp/tv/remote_service/user4321$normal_v4/actions/launchapp`
+   con payload "netflix" / "youtube" (mecanismo documentado de VIDAA).
+   Si la TV los ignora, el siguiente paso es capturar lo que envia
+   la app oficial al abrir esas apps.
+2. **Escribir texto**: el boton Enviar del dialogo publica el texto en
+   `.../actions/input`. Si no funciona, usar el teclado numerico +
+   el D-pad para moverse por el teclado en pantalla de la TV.
+
 ## Usar
 1. Celular y TV en el mismo WiFi DEPARTAMENTOS_24.
-2. Abre la app, IP ya viene `172.30.218.102`, toca **Conectar**.
-3. Si dice "Conectado", toca Vol + para probar.
-4. Si la TV está apagada del todo, toca **Encender (WOL)** primero
-   (MAC 10:c7:53:19:5c:f4), espera unos segundos y conecta.
+2. Abre la app: conecta sola. El boton de encendido se pone verde.
+3. Si dice que no conecta, la TV puede estar apagada del todo:
+   toca el boton rojo de encendido (manda Wake-on-LAN con la MAC
+   10:c7:53:19:5c:f4 y luego intenta conectar), espera unos segundos.
+4. Para probar, toca Vol +.
 
 ## Archivos clave
 - `app/src/main/java/com/vts/hisenseremote/TvRemote.kt` — MQTT + WOL
