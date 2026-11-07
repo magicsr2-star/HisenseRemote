@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0B0B0F"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hisense Remote"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HU50N6000UW · MQTT 36669 legacy · sin PIN"
+            android:textColor="#9AA0A6"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/etTvIp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="IP de la TV"
+            android:inputType="text"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#9AA0A6" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnConnect"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Conectar" />
+
+            <Button
+                android:id="@+id/btnWake"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="Encender (WOL)" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Sin conectar. Mismo WiFi que la TV."
+            android:textColor="#9AA0A6"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="KEY_POWER"
+                android:text="⏻" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:tag="KEY_MUTE"
+                android:text="Mute" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:tag="KEY_MENU"
+                android:text="Menú" />
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:columnCount="3"
+            android:rowCount="3">
+
+            <Button android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_columnWeight="1" android:text="" android:enabled="false" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_columnWeight="1" android:tag="KEY_UP" android:text="▲" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_columnWeight="1" android:text="" android:enabled="false" />
+
+            <Button android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_columnWeight="1" android:tag="KEY_LEFT" android:text="◀" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_columnWeight="1" android:tag="KEY_OK" android:text="OK" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_columnWeight="1" android:tag="KEY_RIGHT" android:text="▶" />
+
+            <Button android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_columnWeight="1" android:text="" android:enabled="false" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_columnWeight="1" android:tag="KEY_DOWN" android:text="▼" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_columnWeight="1" android:text="" android:enabled="false" />
+        </GridLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="KEY_BACK"
+                android:text="Atrás" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:tag="KEY_HOME"
+                android:text="Home" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:tag="KEY_EXIT"
+                android:text="Salir" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="KEY_VOLUMEUP"
+                android:text="Vol +" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:tag="KEY_VOLUMEDOWN"
+                android:text="Vol −" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:tag="KEY_CHANNELUP"
+                android:text="Canal +" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:tag="KEY_CHANNELDOWN"
+                android:text="Canal −" />
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:columnCount="3">
+
+            <Button android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:tag="KEY_1" android:text="1" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:tag="KEY_2" android:text="2" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:tag="KEY_3" android:text="3" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:tag="KEY_4" android:text="4" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:tag="KEY_5" android:text="5" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:tag="KEY_6" android:text="6" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:tag="KEY_7" android:text="7" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:tag="KEY_8" android:text="8" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:tag="KEY_9" android:text="9" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:tag="KEY_0" android:text="0" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:tag="KEY_PLAY" android:text="Play" />
+            <Button android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:tag="KEY_PAUSE" android:text="Pausa" />
+        </GridLayout>
+
+    </LinearLayout>
+</ScrollView>
