@@ -1,63 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="20dp">
+<?xml version='1.0' encoding='utf-8'?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Teclado"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Teclado" android:textColor="#FFFFFF" android:textSize="20sp" android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Escribe con el teclado del telefono y toca Enviar. Si escribir no funciona en tu TV, usa el teclado numerico y el D-pad para moverte por el teclado en pantalla de la TV."
-        android:textColor="#9AA0A6"
-        android:textSize="13sp" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="Escribe con el teclado del telefono y toca Enviar. Si escribir no funciona en tu TV, usa el teclado numerico y el D-pad para moverte por el teclado en pantalla de la TV." android:textColor="#9AA0A6" android:textSize="13sp" />
 
-    <EditText
-        android:id="@+id/etKeyboardText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="Escribe aqui…"
-        android:inputType="text"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#9AA0A6" />
+    <EditText android:id="@+id/etKeyboardText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:hint="Escribe aqui…" android:inputType="text" android:textColor="#FFFFFF" android:textColorHint="#9AA0A6" />
 
-    <Button
-        android:id="@+id/btnSendText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/btn_teal"
-        android:text="Enviar"
-        android:textColor="#FFFFFF" />
+    <Button android:id="@+id/btnSendText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:background="@drawable/btn_teal" android:text="Enviar" android:textColor="#FFFFFF" app:backgroundTint="@null" />
 
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:columnCount="3"
-        android:rowCount="4">
+    <GridLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:columnCount="3" android:rowCount="4">
 
-        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_1" android:text="1" android:textColor="#FFFFFF" />
-        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_2" android:text="2" android:textColor="#FFFFFF" />
-        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_3" android:text="3" android:textColor="#FFFFFF" />
-        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_4" android:text="4" android:textColor="#FFFFFF" />
-        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_5" android:text="5" android:textColor="#FFFFFF" />
-        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_6" android:text="6" android:textColor="#FFFFFF" />
-        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_7" android:text="7" android:textColor="#FFFFFF" />
-        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_8" android:text="8" android:textColor="#FFFFFF" />
-        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_9" android:text="9" android:textColor="#FFFFFF" />
+        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_1" android:text="1" android:textColor="#FFFFFF" app:backgroundTint="@null" />
+        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_2" android:text="2" android:textColor="#FFFFFF" app:backgroundTint="@null" />
+        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_3" android:text="3" android:textColor="#FFFFFF" app:backgroundTint="@null" />
+        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_4" android:text="4" android:textColor="#FFFFFF" app:backgroundTint="@null" />
+        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_5" android:text="5" android:textColor="#FFFFFF" app:backgroundTint="@null" />
+        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_6" android:text="6" android:textColor="#FFFFFF" app:backgroundTint="@null" />
+        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_7" android:text="7" android:textColor="#FFFFFF" app:backgroundTint="@null" />
+        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_8" android:text="8" android:textColor="#FFFFFF" app:backgroundTint="@null" />
+        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_9" android:text="9" android:textColor="#FFFFFF" app:backgroundTint="@null" />
         <Space android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" />
-        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_0" android:text="0" android:textColor="#FFFFFF" />
+        <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" android:background="@drawable/btn_dark" android:tag="KEY_0" android:text="0" android:textColor="#FFFFFF" app:backgroundTint="@null" />
         <Space android:layout_width="0dp" android:layout_height="52dp" android:layout_columnWeight="1" />
     </GridLayout>
 

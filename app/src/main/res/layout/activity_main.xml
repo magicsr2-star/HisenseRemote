@@ -1,349 +1,104 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#0B0B0F"
-    android:padding="20dp">
+<?xml version='1.0' encoding='utf-8'?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#0B0B0F" android:padding="20dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Hisense Remote"
-            android:textColor="#FFFFFF"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+        <TextView android:id="@+id/tvTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:text="Hisense Remote" android:textColor="#FFFFFF" android:textSize="28sp" android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:gravity="center"
-            android:text="HU50N6000UW · MQTT · legacy"
-            android:textColor="#9AA0A6"
-            android:textSize="14sp" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:gravity="center" android:text="HU50N6000UW · MQTT · legacy" android:textColor="#9AA0A6" android:textSize="14sp" />
 
-        <!-- Boton de encendido = conectar. Rojo sin conectar, verde conectada. -->
-        <ImageButton
-            android:id="@+id/btnPower"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/power_circle_red"
-            android:contentDescription="Encendido / Conectar"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_power" />
+        
+        <ImageButton android:id="@+id/btnPower" android:layout_width="120dp" android:layout_height="120dp" android:layout_gravity="center" android:layout_marginTop="20dp" android:background="@drawable/power_circle_red" android:contentDescription="Encendido / Conectar" android:scaleType="centerInside" android:src="@drawable/ic_power" app:backgroundTint="@null" />
 
-        <TextView
-            android:id="@+id/tvPowerHint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="Toca para conectar"
-            android:textColor="#F43F2E"
-            android:textSize="13sp" />
+        <TextView android:id="@+id/tvPowerHint" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:gravity="center" android:text="Toca para conectar" android:textColor="#F43F2E" android:textSize="13sp" />
 
-        <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="Conectando…"
-            android:textColor="#9AA0A6"
-            android:textSize="13sp" />
+        <TextView android:id="@+id/tvStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:gravity="center" android:text="Conectando…" android:textColor="#9AA0A6" android:textSize="13sp" />
 
-        <!-- D-pad -->
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:columnCount="3"
-            android:rowCount="3">
+        
+        <GridLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:columnCount="3" android:rowCount="3">
 
             <Space android:layout_width="0dp" android:layout_height="56dp" android:layout_columnWeight="1" />
-            <Button android:layout_width="0dp" android:layout_height="56dp"
-                android:layout_columnWeight="1" android:background="@drawable/btn_blue"
-                android:tag="KEY_UP" android:text="▲" android:textColor="#FFFFFF" android:textSize="20sp" />
+            <Button android:layout_width="0dp" android:layout_height="56dp" android:layout_columnWeight="1" android:background="@drawable/btn_blue" android:tag="KEY_UP" android:text="▲" android:textColor="#FFFFFF" android:textSize="20sp" app:backgroundTint="@null" />
             <Space android:layout_width="0dp" android:layout_height="56dp" android:layout_columnWeight="1" />
 
-            <Button android:layout_width="0dp" android:layout_height="56dp"
-                android:layout_columnWeight="1" android:background="@drawable/btn_blue"
-                android:tag="KEY_LEFT" android:text="◀" android:textColor="#FFFFFF" android:textSize="20sp" />
-            <Button android:layout_width="0dp" android:layout_height="56dp"
-                android:layout_columnWeight="1" android:background="@drawable/btn_gold"
-                android:tag="KEY_OK" android:text="OK" android:textColor="#FFFFFF" android:textSize="18sp" android:textStyle="bold" />
-            <Button android:layout_width="0dp" android:layout_height="56dp"
-                android:layout_columnWeight="1" android:background="@drawable/btn_blue"
-                android:tag="KEY_RIGHT" android:text="▶" android:textColor="#FFFFFF" android:textSize="20sp" />
+            <Button android:layout_width="0dp" android:layout_height="56dp" android:layout_columnWeight="1" android:background="@drawable/btn_blue" android:tag="KEY_LEFT" android:text="◀" android:textColor="#FFFFFF" android:textSize="20sp" app:backgroundTint="@null" />
+            <Button android:layout_width="0dp" android:layout_height="56dp" android:layout_columnWeight="1" android:background="@drawable/btn_gold" android:tag="KEY_OK" android:text="OK" android:textColor="#FFFFFF" android:textSize="18sp" android:textStyle="bold" app:backgroundTint="@null" />
+            <Button android:layout_width="0dp" android:layout_height="56dp" android:layout_columnWeight="1" android:background="@drawable/btn_blue" android:tag="KEY_RIGHT" android:text="▶" android:textColor="#FFFFFF" android:textSize="20sp" app:backgroundTint="@null" />
 
             <Space android:layout_width="0dp" android:layout_height="56dp" android:layout_columnWeight="1" />
-            <Button android:layout_width="0dp" android:layout_height="56dp"
-                android:layout_columnWeight="1" android:background="@drawable/btn_blue"
-                android:tag="KEY_DOWN" android:text="▼" android:textColor="#FFFFFF" android:textSize="20sp" />
+            <Button android:layout_width="0dp" android:layout_height="56dp" android:layout_columnWeight="1" android:background="@drawable/btn_blue" android:tag="KEY_DOWN" android:text="▼" android:textColor="#FFFFFF" android:textSize="20sp" app:backgroundTint="@null" />
             <Space android:layout_width="0dp" android:layout_height="56dp" android:layout_columnWeight="1" />
         </GridLayout>
 
-        <!-- Atras / Home / Salir -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal">
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:orientation="horizontal">
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_gray"
-                android:tag="KEY_BACK"
-                android:text="ATRÁS"
-                android:textColor="#FFFFFF" />
+            <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_weight="1" android:background="@drawable/btn_gray" android:tag="KEY_BACK" android:text="ATRÁS" android:textColor="#FFFFFF" app:backgroundTint="@null" />
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_gray"
-                android:tag="KEY_HOME"
-                android:text="HOME"
-                android:textColor="#FFFFFF" />
+            <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_marginStart="8dp" android:layout_weight="1" android:background="@drawable/btn_gray" android:tag="KEY_HOME" android:text="HOME" android:textColor="#FFFFFF" app:backgroundTint="@null" />
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_gray"
-                android:tag="KEY_EXIT"
-                android:text="SALIR"
-                android:textColor="#FFFFFF" />
+            <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_marginStart="8dp" android:layout_weight="1" android:background="@drawable/btn_gray" android:tag="KEY_EXIT" android:text="SALIR" android:textColor="#FFFFFF" app:backgroundTint="@null" />
         </LinearLayout>
 
-        <!-- Mute / Menu -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:orientation="horizontal">
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_teal"
-                android:tag="KEY_MUTE"
-                android:text="MUTE"
-                android:textColor="#FFFFFF" />
+            <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_weight="1" android:background="@drawable/btn_teal" android:tag="KEY_MUTE" android:text="MUTE" android:textColor="#FFFFFF" app:backgroundTint="@null" />
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_teal"
-                android:tag="KEY_MENU"
-                android:text="MENÚ"
-                android:textColor="#FFFFFF" />
+            <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_marginStart="8dp" android:layout_weight="1" android:background="@drawable/btn_teal" android:tag="KEY_MENU" android:text="MENÚ" android:textColor="#FFFFFF" app:backgroundTint="@null" />
         </LinearLayout>
 
-        <!-- Volumen: — VOL + -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:orientation="horizontal">
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_blue"
-                android:tag="KEY_VOLUMEDOWN"
-                android:text="—"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp" />
+            <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_weight="1" android:background="@drawable/btn_blue" android:tag="KEY_VOLUMEDOWN" android:text="—" android:textColor="#FFFFFF" android:textSize="22sp" app:backgroundTint="@null" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="2"
-                android:background="@drawable/btn_blue"
-                android:gravity="center"
-                android:text="VOL"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+            <TextView android:layout_width="0dp" android:layout_height="52dp" android:layout_weight="2" android:background="@drawable/btn_blue" android:gravity="center" android:text="VOL" android:textColor="#FFFFFF" android:textSize="16sp" android:textStyle="bold" />
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_blue"
-                android:tag="KEY_VOLUMEUP"
-                android:text="+"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp" />
+            <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_weight="1" android:background="@drawable/btn_blue" android:tag="KEY_VOLUMEUP" android:text="+" android:textColor="#FFFFFF" android:textSize="22sp" app:backgroundTint="@null" />
         </LinearLayout>
 
-        <!-- Canal: — CANAL + -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:orientation="horizontal">
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_blue"
-                android:tag="KEY_CHANNELDOWN"
-                android:text="—"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp" />
+            <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_weight="1" android:background="@drawable/btn_blue" android:tag="KEY_CHANNELDOWN" android:text="—" android:textColor="#FFFFFF" android:textSize="22sp" app:backgroundTint="@null" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="2"
-                android:background="@drawable/btn_blue"
-                android:gravity="center"
-                android:text="CANAL"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+            <TextView android:layout_width="0dp" android:layout_height="52dp" android:layout_weight="2" android:background="@drawable/btn_blue" android:gravity="center" android:text="CANAL" android:textColor="#FFFFFF" android:textSize="16sp" android:textStyle="bold" />
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_blue"
-                android:tag="KEY_CHANNELUP"
-                android:text="+"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp" />
+            <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_weight="1" android:background="@drawable/btn_blue" android:tag="KEY_CHANNELUP" android:text="+" android:textColor="#FFFFFF" android:textSize="22sp" app:backgroundTint="@null" />
         </LinearLayout>
 
-        <!-- Atajos: Netflix / Teclado / YouTube -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btnNetflix"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:background="@drawable/btn_dark_circle"
-                    android:text="N"
-                    android:textColor="#E50914"
-                    android:textSize="32sp"
-                    android:textStyle="bold" />
+                <Button android:id="@+id/btnNetflix" android:layout_width="72dp" android:layout_height="72dp" android:background="@drawable/btn_dark_circle" android:text="N" android:textColor="#E50914" android:textSize="32sp" android:textStyle="bold" app:backgroundTint="@null" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="NETFLIX"
-                    android:textColor="#9AA0A6"
-                    android:textSize="12sp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="NETFLIX" android:textColor="#9AA0A6" android:textSize="12sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btnKeyboard"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:background="@drawable/btn_blue"
-                    android:text="123&#10;ABC"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                <Button android:id="@+id/btnKeyboard" android:layout_width="72dp" android:layout_height="72dp" android:background="@drawable/btn_blue" android:text="123&#10;ABC" android:textColor="#FFFFFF" android:textSize="14sp" android:textStyle="bold" app:backgroundTint="@null" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="TECLADO"
-                    android:textColor="#9AA0A6"
-                    android:textSize="12sp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="TECLADO" android:textColor="#9AA0A6" android:textSize="12sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btnYoutube"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:background="@drawable/btn_dark_circle"
-                    android:text="▶"
-                    android:textColor="#FF0000"
-                    android:textSize="28sp" />
+                <Button android:id="@+id/btnYoutube" android:layout_width="72dp" android:layout_height="72dp" android:background="@drawable/btn_dark_circle" android:text="▶" android:textColor="#FF0000" android:textSize="28sp" app:backgroundTint="@null" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="YOUTUBE"
-                    android:textColor="#9AA0A6"
-                    android:textSize="12sp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="YOUTUBE" android:textColor="#9AA0A6" android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Play / Pausa -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:orientation="horizontal">
+        
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:orientation="horizontal">
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_green"
-                android:tag="KEY_PLAY"
-                android:text="▶ PLAY"
-                android:textColor="#FFFFFF" />
+            <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_weight="1" android:background="@drawable/btn_green" android:tag="KEY_PLAY" android:text="▶ PLAY" android:textColor="#FFFFFF" app:backgroundTint="@null" />
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_purple"
-                android:tag="KEY_PAUSE"
-                android:text="II PAUSA"
-                android:textColor="#FFFFFF" />
+            <Button android:layout_width="0dp" android:layout_height="52dp" android:layout_marginStart="8dp" android:layout_weight="1" android:background="@drawable/btn_purple" android:tag="KEY_PAUSE" android:text="II PAUSA" android:textColor="#FFFFFF" app:backgroundTint="@null" />
         </LinearLayout>
 
     </LinearLayout>
